@@ -39,7 +39,7 @@ public class Book {
     private int pagesNumber;
 
     @Column
-   // @NotBlank(message = "El campo no puede estar en blanco")
+   //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
     private String description;
 
