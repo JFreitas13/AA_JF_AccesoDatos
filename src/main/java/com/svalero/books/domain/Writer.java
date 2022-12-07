@@ -5,15 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalTime;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 
-@Entity(name = "bookstores")
-public class Bookstore {
+@Entity(name = "writers")
+public class Writer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,28 +26,23 @@ public class Bookstore {
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private String city;
-
-    @Column(name = "zip_code")
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
-    private String zipCode;
+    private String description;
 
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private String phoneNumber;
+    private String age;
+
+    @Column(name = "social_networks")
+    //@NotBlank(message = "El campo no puede estar en blanco")
+    //@NotNull(message = "El campo no puede estar vacío")
+    private String socialNetworks;
 
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private LocalTime open;
+    private String reviews;
 
-    @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
-    private LocalTime close;
-
-    @ManyToMany(mappedBy = "bookstores" )
+    @ManyToMany(mappedBy = "writers")
     private List<Book> books;
 }

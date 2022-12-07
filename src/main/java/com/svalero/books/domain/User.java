@@ -5,15 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalTime;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity(name = "bookstores")
-public class Bookstore {
+@Entity(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +26,12 @@ public class Bookstore {
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private String city;
+    private String email;
 
-    @Column(name = "zip_code")
+    @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private String zipCode;
+    private String password;
 
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
@@ -42,13 +41,19 @@ public class Bookstore {
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private LocalTime open;
+    private String city;
 
     @Column
     //@NotBlank(message = "El campo no puede estar en blanco")
     //@NotNull(message = "El campo no puede estar vacío")
-    private LocalTime close;
+    private String zipCode;
 
-    @ManyToMany(mappedBy = "bookstores" )
+    @Column
+    //@NotBlank(message = "El campo no puede estar en blanco")
+    //@NotNull(message = "El campo no puede estar vacío")
+    private String rol;
+
+    @ManyToMany(mappedBy = "users")
     private List<Book> books;
+
 }
