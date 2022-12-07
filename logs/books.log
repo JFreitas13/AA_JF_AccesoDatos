@@ -1,0 +1,11 @@
+2022-12-07 15:35:01,528 INFO org.springframework.boot.StartupInfoLogger [main] Starting BooksApplication using Java 17.0.5 on DESKTOP-5APUJDM with PID 24760 (C:\Users\joana\2DAM\AD\AA1Q\books\target\classes started by joana in C:\Users\joana\2DAM\AD\AA1Q\books)
+2022-12-07 15:35:01,531 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2022-12-07 15:35:02,323 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8081"]
+2022-12-07 15:35:02,324 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-12-07 15:35:02,325 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.69]
+2022-12-07 15:35:02,401 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-12-07 15:35:02,732 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2022-12-07 15:35:02,873 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-12-07 15:35:03,248 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-07 15:35:03,734 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8081"]
+2022-12-07 15:35:03,756 INFO org.springframework.boot.StartupInfoLogger [main] Started BooksApplication in 2.458 seconds (JVM running for 2.766)
