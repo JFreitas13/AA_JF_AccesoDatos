@@ -53,6 +53,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Libreria para mapear campos entre objetos -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<!-- FIN Libreria para mapear campos entre objetos -->
+
 	</dependencies>
 
 	<build>
