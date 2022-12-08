@@ -1,11 +1,13 @@
 package com.svalero.books.domain;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
 import java.util.List;
 
 @Data //genera getters y setters automaticamente
@@ -20,31 +22,29 @@ public class Book {
     private long id;
 
     @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
+    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotNull(message = "El campo no puede estar vacío")
     private String name;
 
-    @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
+    @Column(length = 4)
+    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotNull(message = "El campo no puede estar vacío")
+    @DateTimeFormat(pattern = "yyyy")
     private String yearEdition;
 
     @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
     private String ageRecommended;
 
     @Column
-    //@Min(value = 0)
+    @Min(value = 0)
     private int pagesNumber;
 
     @Column
-   //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
     private String description;
 
     @Column
-    @NotNull
+    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotNull(message = "El campo no puede estar vacío")
     private boolean ebook;
 
    @ManyToMany

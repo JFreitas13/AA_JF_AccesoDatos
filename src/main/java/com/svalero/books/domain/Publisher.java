@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
@@ -19,28 +22,23 @@ public class Publisher {
     private long id;
 
     @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
+    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotNull(message = "El campo no puede estar vacío")
     private String name;
 
     @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
     private String city;
 
-    @Column(name = "zip_code")
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
+    @Column(name = "zip_code", length = 5)
+    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotNull(message = "El campo no puede estar vacío")
     private String zipCode;
 
     @Column(name = "phone_number")
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
+    @Pattern(regexp = "[6][0-9]{8}") //para que el telefono movil empiece por 6 y tenga 9 digitos.
     private String phoneNumber;
 
     @Column
-    //@NotBlank(message = "El campo no puede estar en blanco")
-    //@NotNull(message = "El campo no puede estar vacío")
     private String description;
 
     @OneToMany(mappedBy = "publisher")
