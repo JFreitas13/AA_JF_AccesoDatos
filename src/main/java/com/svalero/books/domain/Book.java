@@ -22,7 +22,7 @@ public class Book {
     private long id;
 
     @Column
-    @NotBlank(message = "El campo no puede estar en blanco")
+    @NotBlank(message = "El campo no puede estar en blanco") //obligatorio
     @NotNull(message = "El campo no puede estar vacío")
     private String name;
 
@@ -42,10 +42,9 @@ public class Book {
     @Column
     private String description;
 
-    @Column
-    @NotBlank(message = "El campo no puede estar en blanco")
+    @Column(name = "is_ebook")
     @NotNull(message = "El campo no puede estar vacío")
-    private boolean ebook;
+    private boolean isEbook;
 
    @ManyToMany
     @JoinTable(name = "stocks",
