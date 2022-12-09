@@ -33,8 +33,8 @@ public class BookController {
     public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
         Book newBook = bookService.addBook(book);
+        logger.debug("end addBook"); //Para indicar en el log que termina la llamada anterior
         return ResponseEntity.status(HttpStatus.CREATED).body(newBook);
-        //logger.debug("end addBook"); //Para indicar en el log que termina la llamada anterior
     }
 
     //borrar libro
@@ -46,8 +46,11 @@ public class BookController {
 
     @PutMapping("/books/{id}")
     public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
-        Book newBook = bookService.modifyBook(id, book);
-        return ResponseEntity.status(HttpStatus.OK).body(newBook);
+        logger.debug("begin modifyBook");
+        Book modifiedBook = bookService.modifyBook(id, book);
+        logger.debug("end modifyBook");
+        return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
+
     }
 
     //buscar todos los libros

@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book addBook(Book book) {
-        return bookRepository.save(book); //meto save es "gratis" para guardar. Le pasas el objeto y el metodo save lo guarda en la BBDD
+        return bookRepository.save(book); //metodo save es "gratis" para guardar. Le pasas el objeto y el metodo save lo guarda en la BBDD
     }
 
     @Override
@@ -46,14 +46,14 @@ public class BookServiceImpl implements BookService {
     public Book modifyBook(long id, Book newBook) throws BookNotFoundException {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(BookNotFoundException::new);
-        //modelMapper.map(newBook, existingBook);
-        existingBook.setName(newBook.getName());
+        newBook.setId(id);
+        modelMapper.map(newBook, existingBook);
+        /* existingBook.setName(newBook.getName());
         existingBook.setYearEdition(newBook.getYearEdition());
         existingBook.setAgeRecommended(newBook.getAgeRecommended());
         existingBook.setPagesNumber(newBook.getPagesNumber());
         existingBook.setDescription(newBook.getDescription());
-        existingBook.setEbook(newBook.isEbook());
-
+        existingBook.setEbook(newBook.isEbook());*/
         return bookRepository.save(existingBook);
     }
 }
