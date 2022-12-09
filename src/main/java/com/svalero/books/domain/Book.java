@@ -42,9 +42,9 @@ public class Book {
     @Column
     private String description;
 
-    @Column(name = "is_ebook")
+    @Column(name = "ebook")
     @NotNull(message = "El campo no puede estar vacío")
-    private boolean isEbook;
+    private boolean ebook;
 
    @ManyToMany
     @JoinTable(name = "stocks",

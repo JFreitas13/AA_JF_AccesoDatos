@@ -48,12 +48,12 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(BookNotFoundException::new);
         newBook.setId(id);
         modelMapper.map(newBook, existingBook);
-        /* existingBook.setName(newBook.getName());
-        existingBook.setYearEdition(newBook.getYearEdition());
-        existingBook.setAgeRecommended(newBook.getAgeRecommended());
-        existingBook.setPagesNumber(newBook.getPagesNumber());
-        existingBook.setDescription(newBook.getDescription());
-        existingBook.setEbook(newBook.isEbook());*/
+//        existingBook.setName(newBook.getName());
+//        existingBook.setYearEdition(newBook.getYearEdition());
+//        existingBook.setAgeRecommended(newBook.getAgeRecommended());
+//        existingBook.setPagesNumber(newBook.getPagesNumber());
+//        existingBook.setDescription(newBook.getDescription());
+//        existingBook.setEbook(newBook.isEbook());
         return bookRepository.save(existingBook);
     }
 }
