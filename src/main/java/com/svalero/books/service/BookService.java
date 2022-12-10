@@ -9,9 +9,10 @@ import java.util.Set;
 //logica de la api. Llaman a la BBDD
 public interface BookService {
 
-    List<Book> findAll();
-    Book findById(long id) throws BookNotFoundException;
+
     Book addBook(Book book);
     void deleteBook(long id) throws BookNotFoundException;
     Book modifyBook(long id, Book newBook) throws BookNotFoundException;
+    List<Book> findAll();
+    Book findById(long id) throws BookNotFoundException;
 }

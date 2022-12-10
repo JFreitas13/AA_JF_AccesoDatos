@@ -18,19 +18,6 @@ public class BookstoreServiceImpl implements BookstoreService {
     @Autowired
     private ModelMapper modelMapper;
 
-    //buscar todas las librerias
-    @Override
-    public List<Bookstore> findAll() {
-        return bookstoreRepository.findAll();
-    }
-
-    //buscar libreria por id
-    @Override
-    public Bookstore findById(long id) throws BookstoreNotFoundException {
-        return bookstoreRepository.findById(id)
-                .orElseThrow(BookstoreNotFoundException::new);
-    }
-
     //añadir libreira
     @Override
     public Bookstore addBookstore(Bookstore bookstore) {
@@ -53,6 +40,19 @@ public class BookstoreServiceImpl implements BookstoreService {
         modelMapper.map(newBookstore, existingBookstore);
 
         return bookstoreRepository.save(existingBookstore);
+    }
+
+    //buscar todas las librerias
+    @Override
+    public List<Bookstore> findAll() {
+        return bookstoreRepository.findAll();
+    }
+
+    //buscar libreria por id
+    @Override
+    public Bookstore findById(long id) throws BookstoreNotFoundException {
+        return bookstoreRepository.findById(id)
+                .orElseThrow(BookstoreNotFoundException::new);
     }
 
 }

@@ -19,16 +19,7 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
-    }
 
-    @Override
-    public Book findById(long id) throws BookNotFoundException {
-        return bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-    }
 
     @Override
     public Book addBook(Book book) {
@@ -56,10 +47,15 @@ public class BookServiceImpl implements BookService {
 //        existingBook.setEbook(newBook.isEbook());
         return bookRepository.save(existingBook);
     }
+
+    @Override
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public Book findById(long id) throws BookNotFoundException {
+        return bookRepository.findById(id)
+                .orElseThrow(BookNotFoundException::new);
+    }
 }
-    /*existingBook.setName(newBook.getName());
-            existingBook.setYearEdition(newBook.getYearEdition());
-            existingBook.setAgeRecommended(newBook.getAgeRecommended());
-            existingBook.setPagesNumber(newBook.getPagesNumber());
-            existingBook.setDescription(newBook.getDescription());
-            existingBook.setEbook(newBook.isEbook());*/
