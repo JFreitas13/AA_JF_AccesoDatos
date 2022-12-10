@@ -26,7 +26,7 @@ public class Book {
     @NotNull(message = "El campo no puede estar vacío")
     private String name;
 
-    @Column(length = 4)
+    @Column(name = "year_edition",length = 4)
     @NotBlank(message = "El campo no puede estar en blanco")
     @NotNull(message = "El campo no puede estar vacío")
     @DateTimeFormat(pattern = "yyyy")

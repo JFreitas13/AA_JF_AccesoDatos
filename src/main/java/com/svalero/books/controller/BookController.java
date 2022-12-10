@@ -44,13 +44,13 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
+    //modificar libro
     @PutMapping("/books/{id}")
     public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
         logger.debug("begin modifyBook");
         Book modifiedBook = bookService.modifyBook(id, book);
         logger.debug("end modifyBook");
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
-
     }
 
     //buscar todos los libros
@@ -62,15 +62,15 @@ public class BookController {
     //buscar libro por id
     @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBook(@PathVariable long id) throws BookNotFoundException {
-        logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
+        logger.debug("begin getBook"); //Para indicar en el log que alguien ha llamado a esta parte
         Book book = bookService.findById(id); //cojo el libro
-        logger.debug("end addBook"); //Para indicar en el log que termina la llamada anterior
+        logger.debug("end getBook"); //Para indicar en el log que termina la llamada anterior
         return ResponseEntity.ok(book); //devuelvo la respuesta con el book
     }
 
     //Excepción 404: Book not found
     @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity<ErrorMessage> handlBookNotFoundException(BookNotFoundException bnfe) {
+    public ResponseEntity<ErrorMessage> handleBookNotFoundException(BookNotFoundException bnfe) {
         logger.error((bnfe.getMessage()), bnfe); //traza de log
         ErrorMessage errorMessage = new ErrorMessage(404, bnfe.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.NOT_FOUND);
