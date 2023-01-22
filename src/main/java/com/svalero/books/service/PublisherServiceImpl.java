@@ -45,7 +45,7 @@ public class PublisherServiceImpl implements PublisherService{
     }
 
     @Override
-    public Publisher findByid(long id) throws PublisherNotFoundException {
+    public Publisher findById(long id) throws PublisherNotFoundException {
         return publisherRepository.findById(id)
                 .orElseThrow(PublisherNotFoundException::new);
     }

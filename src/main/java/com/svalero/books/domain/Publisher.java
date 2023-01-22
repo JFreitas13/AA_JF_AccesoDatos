@@ -1,5 +1,6 @@
 package com.svalero.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,7 +42,8 @@ public class Publisher {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "bookPublisher")
+    @JsonBackReference(value = "book_publisher")
     private List<Book> books;
 
 }

@@ -1,7 +1,6 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Bookstore;
-import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
 import com.svalero.books.service.BookstoreService;
@@ -39,7 +38,9 @@ public class BookstoreController {
     //borrar libreria
     @DeleteMapping("/bookstores/{id}")
     public ResponseEntity<Void> deleteBookstore(@PathVariable long id) throws BookstoreNotFoundException {
+        logger.debug("begin deleteBookstore");
         bookstoreService.deleteBookstore(id);
+        logger.debug("end deleteBookstore");
         return ResponseEntity.noContent().build();
     }
 
@@ -48,7 +49,7 @@ public class BookstoreController {
     public ResponseEntity<Bookstore> modifyBookstore(@PathVariable long id, @RequestBody Bookstore bookstore) throws BookstoreNotFoundException {
         logger.debug("begin modifyBookstore");
         Bookstore modifiedBookstore = bookstoreService.modifyBookstore(id, bookstore);
-        logger.debug("edn modifyBookstore");
+        logger.debug("end modifyBookstore");
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBookstore);
     }
 

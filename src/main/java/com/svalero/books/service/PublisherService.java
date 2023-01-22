@@ -11,6 +11,6 @@ public interface PublisherService {
     void deletePublisher(long id) throws PublisherNotFoundException;
     Publisher modifyPublisher(long id, Publisher publisher) throws PublisherNotFoundException;
     List<Publisher> findAll();
-    Publisher findByid(long id) throws PublisherNotFoundException;
+    Publisher findById(long id) throws PublisherNotFoundException;
 }
 

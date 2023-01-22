@@ -3,7 +3,6 @@ package com.svalero.books.controller;
 import com.svalero.books.domain.Publisher;
 import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
-import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.service.PublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +39,9 @@ public class PublisherController {
     //borrar editorial
     @DeleteMapping("/publishers/{id}")
     public ResponseEntity<Void> deletePublisher(@PathVariable long id) throws PublisherNotFoundException {
+        logger.debug("begin deletePublisher");
         publisherService.deletePublisher(id);
+        logger.debug("end deletePublisher");
         return ResponseEntity.noContent().build();
     }
 
@@ -63,7 +64,7 @@ public class PublisherController {
     @GetMapping("/publishers/{id}")
     public ResponseEntity<Publisher> getPublisher(@PathVariable long id) throws PublisherNotFoundException {
         logger.debug("begin getPublisher");
-        Publisher publisher = publisherService.findByid(id);
+        Publisher publisher = publisherService.findById(id);
         logger.debug("end getPublisher");
         return ResponseEntity.ok(publisher);
     }

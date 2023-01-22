@@ -3,6 +3,7 @@ package com.svalero.books.controller;
 import com.svalero.books.domain.Book;
 import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
+import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,18 +29,20 @@ public class BookController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
     //añadir libro
-    @PostMapping("/books")
-    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
+    @PostMapping("/books/{publishersId}")
+    public ResponseEntity<Book> addBook(@Valid @PathVariable("publishersId") long publisherId, @RequestBody Book book) throws PublisherNotFoundException {
         logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
-        Book newBook = bookService.addBook(book);
+        Book newBook = bookService.addBook(book, publisherId);
         logger.debug("end addBook"); //Para indicar en el log que termina la llamada anterior
-        return ResponseEntity.status(HttpStatus.CREATED).body(newBook);
+        return new ResponseEntity<>(newBook, HttpStatus.CREATED);
     }
 
     //borrar libro
     @DeleteMapping("/books/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable long id) throws BookNotFoundException {
+        logger.debug("begin deleteBook");
         bookService.deleteBook(id);
+        logger.debug("end deleteBook");
         return ResponseEntity.noContent().build();
     }
 

@@ -27,10 +27,10 @@ public class Book {
     private String name;
 
     @Column(name = "year_edition",length = 4)
-    @NotBlank(message = "El campo no puede estar en blanco")
+//    @NotBlank(message = "El campo no puede estar en blanco")
     @NotNull(message = "El campo no puede estar vacío")
     @DateTimeFormat(pattern = "yyyy")
-    private String yearEdition;
+    private int yearEdition;
 
     @Column
     private String ageRecommended;
@@ -42,7 +42,7 @@ public class Book {
     @Column
     private String description;
 
-    @Column(name = "ebook")
+    @Column
     @NotNull(message = "El campo no puede estar vacío")
     private boolean ebook;
 
@@ -52,7 +52,7 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "bookstore_id"))
     private List<Bookstore> bookstores;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "orders",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -66,5 +66,5 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
-    private Publisher publisher;
+    private Publisher bookPublisher;
 }

@@ -10,5 +10,6 @@ import java.util.List;
 public interface BookRepository extends CrudRepository<Book, Long> {
 
     List<Book> findAll(); //listado de todos los libros
-    //Book findById(long id); // buscar por id
+    //List<Book> findBookByUserId(Long userId);
+   // Book findById(long id); // buscar por id
 }

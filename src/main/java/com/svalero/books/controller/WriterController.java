@@ -36,7 +36,9 @@ public class WriterController {
 
     @DeleteMapping("/writers/{id}")
     public ResponseEntity<Void> deleteWriter(@PathVariable long id) throws WriterNotFoundException {
+        logger.debug("begin deleteWriter");
         writerService.deleteWriter(id);
+        logger.debug("end deleteWriter");
         return ResponseEntity.noContent().build();
     }
 

@@ -1,8 +1,11 @@
 package com.svalero.books.service;
 
 import com.svalero.books.domain.Book;
+import com.svalero.books.domain.Publisher;
 import com.svalero.books.exception.BookNotFoundException;
+import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.repository.BookRepository;
+import com.svalero.books.repository.PublisherRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,18 @@ public class BookServiceImpl implements BookService {
     BookRepository bookRepository; //conexion a BBDD y asi tiene acceso a todos los metodos
 
     @Autowired
+    PublisherRepository publisherRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public Book addBook(Book book) {
+    public Book addBook(Book book, long publisherId) throws PublisherNotFoundException {
+
+        Publisher publisher = publisherRepository.findById(publisherId)
+                .orElseThrow(PublisherNotFoundException::new);
+        book.setBookPublisher(publisher);
+
         return bookRepository.save(book); //metodo save es "gratis" para guardar. Le pasas el objeto y el metodo save lo guarda en la BBDD
     }
 
@@ -37,12 +48,7 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(BookNotFoundException::new);
         newBook.setId(id);
         modelMapper.map(newBook, existingBook);
-//        existingBook.setName(newBook.getName());
-//        existingBook.setYearEdition(newBook.getYearEdition());
-//        existingBook.setAgeRecommended(newBook.getAgeRecommended());
-//        existingBook.setPagesNumber(newBook.getPagesNumber());
-//        existingBook.setDescription(newBook.getDescription());
-//        existingBook.setEbook(newBook.isEbook());
+
         return bookRepository.save(existingBook);
     }
 
