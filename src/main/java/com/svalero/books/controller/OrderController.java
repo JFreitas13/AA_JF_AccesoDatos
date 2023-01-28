@@ -1,6 +1,5 @@
 package com.svalero.books.controller;
 
-import com.svalero.books.domain.Book;
 import com.svalero.books.domain.Order;
 import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
@@ -31,17 +30,17 @@ public class OrderController {
 
     @PostMapping("/orders/{bookId}/{userId}")
     public ResponseEntity<Order> addOrder(@Valid @PathVariable("bookId") long bookId, @PathVariable("userId") long userId, @RequestBody Order order) throws BookNotFoundException, UserNotFoundException {
-        logger.debug("begin addOder"); //Para indicar en el log que alguien ha llamado a esta parte
+        logger.debug("begin addOrder"); //Para indicar en el log que alguien ha llamado a esta parte
         Order newOrder = orderService.addOrder(order, bookId, userId);
         logger.debug("end addOrder"); //Para indicar en el log que termina la llamada anterior
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/orders/{id}")
-    public ResponseEntity<Void> deleteOder(@PathVariable long id) throws OrderNotFoundException {
-        logger.debug("begin deleteOder");
+    public ResponseEntity<Void> deleteOrder(@PathVariable long id) throws OrderNotFoundException {
+        logger.debug("begin deleteOrder");
         orderService.deleteOrder(id);
-        logger.debug("end deleteOder");
+        logger.debug("end deleteOrder");
         return ResponseEntity.noContent().build();
     }
 
@@ -60,7 +59,7 @@ public class OrderController {
 
     //buscar libro por id
     @GetMapping("/orders/{id}")
-    public ResponseEntity<Order> geetOrder(@PathVariable long id) throws OrderNotFoundException {
+    public ResponseEntity<Order> getOrder(@PathVariable long id) throws OrderNotFoundException {
         logger.debug("begin getOrder"); //Para indicar en el log que alguien ha llamado a esta parte
         Order order = orderService.findById(id); //cojo el libro
         logger.debug("end getOrder"); //Para indicar en el log que termina la llamada anterior

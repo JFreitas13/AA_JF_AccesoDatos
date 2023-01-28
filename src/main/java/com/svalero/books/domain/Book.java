@@ -65,8 +65,8 @@ public class Book {
 //            inverseJoinColumns = @JoinColumn(name = "writer_id"))
 //    private List<Writer> writers;
 
-    @OneToMany(mappedBy = "bookCopy")
-    @JsonBackReference(value = "book_copy")
+    @OneToMany(mappedBy = "copyBook")
+    @JsonBackReference(value = "copy_book")
     private List<Copy> copies;
 
     @OneToMany(mappedBy = "orderBook")

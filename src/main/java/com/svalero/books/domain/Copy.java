@@ -26,9 +26,9 @@ public class Copy {
 
     @ManyToOne
     @JoinColumn(name = "book_id")
-    private Copy bookCopy;
+    private Book copyBook;
 
     @ManyToOne
     @JoinColumn(name = "bookstore_id")
-    private Copy bookstoreCopy;
+    private Bookstore copyBookstore;
 }

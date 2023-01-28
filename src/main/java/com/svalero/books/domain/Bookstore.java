@@ -54,7 +54,7 @@ public class Bookstore {
 //    @ManyToMany(mappedBy = "bookstores" )
 //    private List<Book> books;
 
-    @OneToMany(mappedBy = "bookstoreCopy")
-    @JsonBackReference(value = "bookstore_copy")
+    @OneToMany(mappedBy = "copyBookstore")
+    @JsonBackReference(value = "copy_bookstore")
     private List<Copy> copies;
 }
