@@ -47,11 +47,19 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-    //modificar libro
-    @PutMapping("/books/{id}")
-    public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
+//    //modificar libro
+//    @PutMapping("/books/{id}")
+//    public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
+//        logger.debug("begin modifyBook");
+//        Book modifiedBook = bookService.modifyBook(id, book);
+//        logger.debug("end modifyBook");
+//        return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
+//    }
+
+    @PutMapping("/books/{id}/{publishersId}/{writerId}")
+    public ResponseEntity<Book> modifyBook(@PathVariable long id,  @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException {
         logger.debug("begin modifyBook");
-        Book modifiedBook = bookService.modifyBook(id, book);
+        Book modifiedBook = bookService.modifyBook(id, publisherId, writerId, book);
         logger.debug("end modifyBook");
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
     }

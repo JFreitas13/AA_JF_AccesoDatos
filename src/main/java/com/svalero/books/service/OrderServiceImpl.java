@@ -52,7 +52,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order modifyOrder(long id, Order newOrder) throws OrderNotFoundException {
+    public Order modifyOrder(long id, long bookId, long userId, Order newOrder) throws OrderNotFoundException, BookNotFoundException, UserNotFoundException {
+
+        Book existingBook = bookRepository.findById(bookId)
+                .orElseThrow(BookNotFoundException::new);
+        newOrder.setOrderBook(existingBook);
+
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
+        newOrder.setOrderUser(existingUser);
+
         Order existingOrder = orderRepository.findById(id)
                 .orElseThrow(OrderNotFoundException::new);
         newOrder.setId(id);

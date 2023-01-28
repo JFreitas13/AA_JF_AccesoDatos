@@ -1,6 +1,7 @@
 package com.svalero.books.service;
 
 import com.svalero.books.domain.Bookstore;
+import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.repository.BookstoreRepository;
 import org.modelmapper.ModelMapper;
@@ -55,4 +56,28 @@ public class BookstoreServiceImpl implements BookstoreService {
                 .orElseThrow(BookstoreNotFoundException::new);
     }
 
+    @Override
+    public List<Bookstore> findByCityAndZipCode(String city, String zipCode) {
+        return bookstoreRepository.findByCityAndZipCode(city, zipCode);
+    }
+
+    @Override
+    public List<Bookstore> findByZipCode(String zipCode) {
+        return bookstoreRepository.findByZipCode(zipCode);
+    }
+
+    @Override
+    public List<Bookstore> findByName(String name) {
+        return bookstoreRepository.findByName(name);
+    }
+
+    @Override
+    public List<Bookstore> findByCity(String city) {
+        return bookstoreRepository.findByCity(city);
+    }
+
+    @Override
+    public List<Bookstore> findByNameAndCityAndZipCode(String name, String city, String zipCode) {
+        return bookstoreRepository.findByNameAndCityAndZipCode(name, city, zipCode);
+    }
 }

@@ -1,7 +1,6 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Copy;
-import com.svalero.books.domain.Order;
 import com.svalero.books.exception.*;
 import com.svalero.books.service.CopyService;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class Copycontroller {
+public class CopyController {
 
     @Autowired
     CopyService copyService; //no me puedo conectar directamente con la BBDD. Me conecto al Service que llama al Repository que llama a la BBDD
@@ -42,10 +41,18 @@ public class Copycontroller {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/copies/{id}")
-    public ResponseEntity<Copy> modifyCopy(@PathVariable long id, @RequestBody Copy copy) throws CopyNotFoundException {
+//    @PutMapping("/copies/{id}")
+//    public ResponseEntity<Copy> modifyCopy(@PathVariable long id, @RequestBody Copy copy) throws CopyNotFoundException {
+//        logger.debug("begin modifyCopy");
+//        Copy modifiedCopy = copyService.modifyCopy(id, copy);
+//        logger.debug("end modifyCopy");
+//        return ResponseEntity.status(HttpStatus.OK).body(modifiedCopy);
+//    }
+
+    @PutMapping("/copies/{id}/{bookId}/{bookstoreId}")
+    public ResponseEntity<Copy> modifyCopy(@PathVariable long id, @PathVariable("bookId") long bookId, @PathVariable("bookstoreId") long bookstoreId, @RequestBody Copy copy) throws CopyNotFoundException, BookNotFoundException, BookstoreNotFoundException {
         logger.debug("begin modifyCopy");
-        Copy modifiedCopy = copyService.modifyCopy(id, copy);
+        Copy modifiedCopy = copyService.modifyCopy(id, bookId, bookstoreId, copy);
         logger.debug("end modifyCopy");
         return ResponseEntity.status(HttpStatus.OK).body(modifiedCopy);
     }

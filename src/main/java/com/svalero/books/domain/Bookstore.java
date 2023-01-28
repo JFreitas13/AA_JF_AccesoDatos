@@ -25,16 +25,12 @@ public class Bookstore {
     private long id;
 
     @Column
-    @NotBlank(message = "El campo no puede estar en blanco")
-    @NotNull(message = "El campo no puede estar vacío")
     private String name;
 
     @Column
     private String city;
 
     @Column(name = "zip_code", length = 5)
-    @NotBlank(message = "El campo no puede estar en blanco")
-    @NotNull(message = "El campo no puede estar vacío")
     private String zipCode;
 
     @Column
@@ -44,10 +40,12 @@ public class Bookstore {
     private String phoneNumber;
 
     @Column
+    @NotNull(message = "El campo no puede estar vacío")
     @DateTimeFormat(pattern = "hh:mm")
     private LocalTime open;
 
     @Column
+    @NotNull(message = "El campo no puede estar vacío")
     @DateTimeFormat(pattern = "hh:mm")
     private LocalTime close;
 //

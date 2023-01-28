@@ -12,7 +12,7 @@ public interface BookService {
 
     Book addBook(Book book, long publisherId, long writerId) throws PublisherNotFoundException, WriterNotFoundException;
     void deleteBook(long id) throws BookNotFoundException;
-    Book modifyBook(long id, Book newBook) throws BookNotFoundException;
+    Book modifyBook(long id, long publisherId, long writerId, Book newBook) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException;
     List<Book> findAll();
     Book findById(long id) throws BookNotFoundException;
 }

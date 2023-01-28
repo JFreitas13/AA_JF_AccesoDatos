@@ -53,10 +53,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book modifyBook(long id, Book newBook) throws BookNotFoundException {
+    public Book modifyBook(long id, long publisherId, long writerId, Book newBook) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException {
+
+        Publisher existingPublisher = publisherRepository.findById(publisherId)
+                        .orElseThrow(PublisherNotFoundException::new);
+        newBook.setBookPublisher(existingPublisher);
+
+        Writer existingWriter = writerRepository.findById(writerId)
+                        .orElseThrow(WriterNotFoundException::new);
+        newBook.setBookWriter(existingWriter);
+
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(BookNotFoundException::new);
         newBook.setId(id);
+
         modelMapper.map(newBook, existingBook);
 
         return bookRepository.save(existingBook);

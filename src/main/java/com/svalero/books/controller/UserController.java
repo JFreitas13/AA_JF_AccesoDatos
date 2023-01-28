@@ -27,21 +27,21 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     //añadir usuario
-//    @PostMapping("/users")
-//    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-//        logger.debug("begin addUser");
-//        User newUser = userService.addUser(user);
-//        logger.debug("end addUser");
-//        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
-//    }
-
-    @PostMapping("/books/{booksId}/users")
-    public ResponseEntity<User> addUser(@Valid @PathVariable(value = "booksId") Long userId, @RequestBody User user) {
+    @PostMapping("/users")
+    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         logger.debug("begin addUser");
         User newUser = userService.addUser(user);
         logger.debug("end addUser");
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
+//
+//    @PostMapping("/books/{booksId}/users")
+//    public ResponseEntity<User> addUser(@Valid @PathVariable(value = "booksId") Long userId, @RequestBody User user) {
+//        logger.debug("begin addUser");
+//        User newUser = userService.addUser(user);
+//        logger.debug("end addUser");
+//        return new ResponseEntity<>(user, HttpStatus.CREATED);
+//    }
 
     //borrar usuario
     @DeleteMapping("/users/{id}")

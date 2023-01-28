@@ -46,10 +46,20 @@ public class CopyServiceImpl implements CopyService {
     }
 
     @Override
-    public Copy modifyCopy(long id, Copy newCopy) throws CopyNotFoundException {
+    public Copy modifyCopy(long id, long bookId, long bookstoreId, Copy newCopy) throws CopyNotFoundException, BookNotFoundException, BookstoreNotFoundException {
+
+        Book existingBook = bookRepository.findById(bookId)
+                .orElseThrow(BookNotFoundException::new);
+        newCopy.setCopyBook(existingBook);
+
+        Bookstore existingBookstore = bookstoreRepository.findById(bookstoreId)
+                .orElseThrow(BookstoreNotFoundException::new);
+        newCopy.setCopyBookstore(existingBookstore);
+
         Copy existingCopy = copyRepository.findById(id)
                 .orElseThrow(CopyNotFoundException::new);
         newCopy.setId(id);
+
         modelMapper.map(newCopy, existingCopy);
 
         return copyRepository.save(existingCopy);

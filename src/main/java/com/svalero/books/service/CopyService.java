@@ -14,7 +14,7 @@ public interface CopyService {
 
     Copy addCopy(Copy copy, long bookId, long bookstoreId) throws BookNotFoundException, BookstoreNotFoundException;
     void deleteCopy(long id) throws CopyNotFoundException;
-    Copy modifyCopy(long id, Copy copy) throws CopyNotFoundException;
+    Copy modifyCopy(long id, long bookId, long bookstoreId, Copy copy) throws CopyNotFoundException, BookNotFoundException, BookstoreNotFoundException;
     List<Copy> findAll();
     Copy findById(long id) throws CopyNotFoundException;
 

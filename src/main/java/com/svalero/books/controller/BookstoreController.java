@@ -1,6 +1,7 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Bookstore;
+import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
 import com.svalero.books.service.BookstoreService;
@@ -55,8 +56,30 @@ public class BookstoreController {
 
     //buscar todas librerias
     @GetMapping("/bookstores")
-    public ResponseEntity<List<Bookstore>> getBookstores() {
-        return ResponseEntity.ok(bookstoreService.findAll());
+    public ResponseEntity<List<Bookstore>> getBookstores(
+                @RequestParam(defaultValue = "") String name,
+                @RequestParam(defaultValue = "") String city,
+                @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
+
+//        List<Bookstore> bookstores = null;
+
+        if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
+            logger.debug("get with filters");
+            return ResponseEntity.ok(bookstoreService.findAll());
+        } else if ((city.equals("")) && zipCode.equals("")) {
+            logger.debug("get with filters");
+            return ResponseEntity.ok(bookstoreService.findByName(name));
+        } else if (name.equals("") && (city.equals(""))) {
+            logger.debug("get with filters");
+            return ResponseEntity.ok(bookstoreService.findByZipCode(zipCode));
+        } else if (name.equals("") && zipCode.equals("")) {
+            logger.debug("get with filters");
+            return ResponseEntity.ok((bookstoreService.findByCity(city)));
+        }
+        logger.debug("get with filters");
+        List<Bookstore> bookstores = bookstoreService.findByNameAndCityAndZipCode(name, city, zipCode);
+        return ResponseEntity.ok(bookstores);
+
     }
 
     //buscar libreria por id
