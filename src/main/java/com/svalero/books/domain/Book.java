@@ -1,8 +1,10 @@
 package com.svalero.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -52,17 +54,25 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "bookstore_id"))
     private List<Bookstore> bookstores;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "orders",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "orders",
+//            joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private List<User> users;
 
-    @ManyToMany
-    @JoinTable(name = "collection",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "writer_id"))
-    private List<Writer> writers;
+//    @ManyToMany
+//    @JoinTable(name = "collection",
+//            joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "writer_id"))
+//    private List<Writer> writers;
+
+    @OneToMany(mappedBy = "bookOrder")
+    @JsonBackReference(value = "book_order")
+    private List<Order> orders;
+
+    @ManyToOne
+    @JoinColumn(name = "writer_id")
+    private Writer bookWriter;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")

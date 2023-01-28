@@ -1,5 +1,6 @@
 package com.svalero.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,7 +56,10 @@ public class User {
     @NotNull(message = "El campo no puede estar vacío")
     private String rol;
 
-    @ManyToMany(mappedBy = "users")
-    private List<Book> books;
+//    @ManyToMany(mappedBy = "users")
+//    private List<Book> books;
 
+    @OneToMany(mappedBy = "userOrder")
+    @JsonBackReference(value = "user_order")
+    private List<Order> orders;
 }
