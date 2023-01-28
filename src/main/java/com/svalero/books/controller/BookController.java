@@ -30,7 +30,7 @@ public class BookController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
     //añadir libro
-    @PostMapping("/books/{publishersId}/{writerId)")
+    @PostMapping("/books/{publishersId}/{writerId}")
     public ResponseEntity<Book> addBook(@Valid @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws PublisherNotFoundException, WriterNotFoundException {
         logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
         Book newBook = bookService.addBook(book, publisherId, writerId);

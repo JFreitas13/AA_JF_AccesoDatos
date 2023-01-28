@@ -3,13 +3,9 @@ package com.svalero.books.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.time.LocalTime;
-
+import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +18,7 @@ public class Order {
     private long id;
 
     @Column(name = "order_date")
-    @NotBlank(message = "El campo no puede estar en blanco") //obligatorio
-    @NotNull(message = "El campo no puede estar vacío")
-    @DateTimeFormat
-    private LocalTime orderDate;
+    private LocalDate orderDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

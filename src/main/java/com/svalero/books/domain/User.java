@@ -59,7 +59,7 @@ public class User {
 //    @ManyToMany(mappedBy = "users")
 //    private List<Book> books;
 
-    @OneToMany(mappedBy = "OrderUser")
+    @OneToMany(mappedBy = "orderUser")
     @JsonBackReference(value = "order_user")
     private List<Order> orders;
 }

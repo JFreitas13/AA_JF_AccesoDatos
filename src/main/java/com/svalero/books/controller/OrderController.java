@@ -29,7 +29,7 @@ public class OrderController {
 
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
-    @PostMapping("/orders/{bookId}/{userId)")
+    @PostMapping("/orders/{bookId}/{userId}")
     public ResponseEntity<Order> addOrder(@Valid @PathVariable("bookId") long bookId, @PathVariable("userId") long userId, @RequestBody Order order) throws BookNotFoundException, UserNotFoundException {
         logger.debug("begin addOder"); //Para indicar en el log que alguien ha llamado a esta parte
         Order newOrder = orderService.addOrder(order, bookId, userId);
