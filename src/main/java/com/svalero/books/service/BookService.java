@@ -14,5 +14,10 @@ public interface BookService {
     void deleteBook(long id) throws BookNotFoundException;
     Book modifyBook(long id, long publisherId, long writerId, Book newBook) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException;
     List<Book> findAll();
+    List<Book> findByName(String name) throws BookNotFoundException;
+    List<Book> findByYearEdition(int yearEdition) throws BookNotFoundException;
+    List<Book> findByPagesNumber(int pagesNumber) throws BookNotFoundException;
+    List<Book> findByNameAndYearEditionAndPagesNumber(String name, int yearEdition, int pagesNumber) throws BookNotFoundException;
     Book findById(long id) throws BookNotFoundException;
+
 }

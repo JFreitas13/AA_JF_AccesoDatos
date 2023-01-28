@@ -59,9 +59,7 @@ public class BookstoreController {
     public ResponseEntity<List<Bookstore>> getBookstores(
                 @RequestParam(defaultValue = "") String name,
                 @RequestParam(defaultValue = "") String city,
-                @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
-
-//        List<Bookstore> bookstores = null;
+                @RequestParam(defaultValue = "") String zipCode) throws BookstoreNotFoundException {
 
         if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
             logger.debug("get with filters");

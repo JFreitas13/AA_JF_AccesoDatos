@@ -78,6 +78,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findByName(String name) {
+        return bookRepository.findByName(name);
+    }
+
+    @Override
+    public List<Book> findByYearEdition(int yearEdition) {
+        return bookRepository.findByYearEdition(yearEdition);
+    }
+
+    @Override
+    public List<Book> findByPagesNumber(int pagesNumber) {
+        return bookRepository.findByPagesNumber(pagesNumber);
+    }
+
+    @Override
+    public List<Book> findByNameAndYearEditionAndPagesNumber(String name, int yearEdition, int pagesNumber) {
+        return bookRepository.findByNameAndYearEditionAndPagesNumber(name, yearEdition, pagesNumber);
+    }
+
+    @Override
     public Book findById(long id) throws BookNotFoundException {
         return bookRepository.findById(id)
                 .orElseThrow(BookNotFoundException::new);

@@ -1,10 +1,8 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Book;
-import com.svalero.books.exception.BookNotFoundException;
-import com.svalero.books.exception.ErrorMessage;
-import com.svalero.books.exception.PublisherNotFoundException;
-import com.svalero.books.exception.WriterNotFoundException;
+import com.svalero.books.domain.Bookstore;
+import com.svalero.books.exception.*;
 import com.svalero.books.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,9 +64,55 @@ public class BookController {
 
     //buscar todos los libros
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks() {
-        return ResponseEntity.ok(bookService.findAll()); //me devuelve desde el service
+    public ResponseEntity<List<Book>> getBooks(
+                @RequestParam(defaultValue = "") String name,
+                @RequestParam(defaultValue = "0") int yearEdition,
+                @RequestParam(defaultValue = "0") int pagesNumber) throws BookNotFoundException {
+
+        if ((name.equals("")) && (yearEdition == 0) && (pagesNumber == 0)) {
+            logger.debug("get book with filters");
+            return ResponseEntity.ok(bookService.findAll());
+        } else if ((name.equals("")) && (yearEdition == 0)) {
+            logger.debug("get book with filters");
+            return ResponseEntity.ok(bookService.findByPagesNumber(pagesNumber));
+        } else if ((name.equals("")) && (pagesNumber == 0)) {
+            logger.debug("get book with filters");
+            return ResponseEntity.ok(bookService.findByYearEdition(yearEdition));
+        } else if ((yearEdition == 0) && (pagesNumber == 0)){
+            logger.debug("get book with filters");
+            return ResponseEntity.ok(bookService.findByName(name));
+        }
+        logger.debug("get book with filters");
+        List<Book> books = bookService.findByNameAndYearEditionAndPagesNumber(name, yearEdition, pagesNumber);
+        return ResponseEntity.ok(books); //me devuelve desde el service
     }
+
+//    @GetMapping("/bookstores")
+//    public ResponseEntity<List<Bookstore>> getBookstores(
+//            @RequestParam(defaultValue = "") String name,
+//            @RequestParam(defaultValue = "") String city,
+//            @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
+//
+////        List<Bookstore> bookstores = null;
+//
+//        if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
+//            logger.debug("get with filters");
+//            return ResponseEntity.ok(bookstoreService.findAll());
+//        } else if ((city.equals("")) && zipCode.equals("")) {
+//            logger.debug("get with filters");
+//            return ResponseEntity.ok(bookstoreService.findByName(name));
+//        } else if (name.equals("") && (city.equals(""))) {
+//            logger.debug("get with filters");
+//            return ResponseEntity.ok(bookstoreService.findByZipCode(zipCode));
+//        } else if (name.equals("") && zipCode.equals("")) {
+//            logger.debug("get with filters");
+//            return ResponseEntity.ok((bookstoreService.findByCity(city)));
+//        }
+//        logger.debug("get with filters");
+//        List<Bookstore> bookstores = bookstoreService.findByNameAndCityAndZipCode(name, city, zipCode);
+//        return ResponseEntity.ok(bookstores);
+//
+//    }
 
     //buscar libro por id
     @GetMapping("/books/{id}")
