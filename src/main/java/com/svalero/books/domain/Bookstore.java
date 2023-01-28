@@ -1,5 +1,6 @@
 package com.svalero.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +50,11 @@ public class Bookstore {
     @Column
     @DateTimeFormat(pattern = "hh:mm")
     private LocalTime close;
+//
+//    @ManyToMany(mappedBy = "bookstores" )
+//    private List<Book> books;
 
-    @ManyToMany(mappedBy = "bookstores" )
-    private List<Book> books;
+    @OneToMany(mappedBy = "bookstoreCopy")
+    @JsonBackReference(value = "bookstore_copy")
+    private List<Copy> copies;
 }

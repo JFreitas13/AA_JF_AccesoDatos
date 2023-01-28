@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -48,11 +47,11 @@ public class Book {
     @NotNull(message = "El campo no puede estar vacío")
     private boolean ebook;
 
-   @ManyToMany
-    @JoinTable(name = "stocks",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "bookstore_id"))
-    private List<Bookstore> bookstores;
+//   @ManyToMany
+//    @JoinTable(name = "stocks",
+//            joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "bookstore_id"))
+//    private List<Bookstore> bookstores;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "orders",
@@ -66,15 +65,21 @@ public class Book {
 //            inverseJoinColumns = @JoinColumn(name = "writer_id"))
 //    private List<Writer> writers;
 
-    @OneToMany(mappedBy = "bookOrder")
-    @JsonBackReference(value = "book_order")
+    @OneToMany(mappedBy = "bookCopy")
+    @JsonBackReference(value = "book_copy")
+    private List<Copy> copies;
+
+    @OneToMany(mappedBy = "orderBook")
+    @JsonBackReference(value = "order_book")
     private List<Order> orders;
+
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private Publisher bookPublisher;
 
     @ManyToOne
     @JoinColumn(name = "writer_id")
     private Writer bookWriter;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher bookPublisher;
+
 }

@@ -3,35 +3,32 @@ package com.svalero.books.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity(name = "orders")
-public class Order {
+@Entity(name = "copies")
+public class Copy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "order_date")
+    @Column
     @NotBlank(message = "El campo no puede estar en blanco") //obligatorio
     @NotNull(message = "El campo no puede estar vacío")
-    @DateTimeFormat
-    private LocalTime orderDate;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User orderUser;
+    private String barCode;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
-    private Book orderBook;
+    private Copy bookCopy;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Copy bookstoreCopy;
 }

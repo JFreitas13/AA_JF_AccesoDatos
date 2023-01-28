@@ -2,10 +2,13 @@ package com.svalero.books.service;
 
 import com.svalero.books.domain.Book;
 import com.svalero.books.domain.Publisher;
+import com.svalero.books.domain.Writer;
 import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.PublisherNotFoundException;
+import com.svalero.books.exception.WriterNotFoundException;
 import com.svalero.books.repository.BookRepository;
 import com.svalero.books.repository.PublisherRepository;
+import com.svalero.books.repository.WriterRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +26,21 @@ public class BookServiceImpl implements BookService {
     PublisherRepository publisherRepository;
 
     @Autowired
+    WriterRepository writerRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public Book addBook(Book book, long publisherId) throws PublisherNotFoundException {
+    public Book addBook(Book book, long publisherId, long writerId) throws PublisherNotFoundException, WriterNotFoundException {
 
         Publisher publisher = publisherRepository.findById(publisherId)
                 .orElseThrow(PublisherNotFoundException::new);
         book.setBookPublisher(publisher);
+
+        Writer writer = writerRepository.findById(writerId)
+                .orElseThrow(WriterNotFoundException::new);
+        book.setBookWriter(writer);
 
         return bookRepository.save(book); //metodo save es "gratis" para guardar. Le pasas el objeto y el metodo save lo guarda en la BBDD
     }
