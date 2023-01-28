@@ -45,6 +45,26 @@ public class WriterServiceImpl implements WriterService {
     }
 
     @Override
+    public List<Writer> findByName(String name) {
+        return writerRepository.findByName(name);
+    }
+
+    @Override
+    public List<Writer> findByAge(String age) {
+        return writerRepository.findByAge(age);
+    }
+
+    @Override
+    public List<Writer> findByReviews(float reviews) {
+        return writerRepository.findByReviews(reviews);
+    }
+
+    @Override
+    public List<Writer> findByNameAndAgeAndReviews(String name, String age, float reviews) {
+        return writerRepository.findByNameAndAgeAndReviews(name, age, reviews);
+    }
+
+    @Override
     public Writer findById(long id) throws WriterNotFoundException {
         return writerRepository.findById(id)
                 .orElseThrow(WriterNotFoundException::new);

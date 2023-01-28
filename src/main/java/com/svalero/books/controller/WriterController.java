@@ -1,7 +1,9 @@
 package com.svalero.books.controller;
 
+import com.svalero.books.domain.User;
 import com.svalero.books.domain.Writer;
 import com.svalero.books.exception.ErrorMessage;
+import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.exception.WriterNotFoundException;
 import com.svalero.books.service.WriterService;
 import org.slf4j.Logger;
@@ -51,8 +53,27 @@ public class WriterController {
     }
 
     @GetMapping("/writers")
-    public ResponseEntity<List<Writer>> getWriters() {
-        return ResponseEntity.ok(writerService.findAll());
+    public ResponseEntity<List<Writer>> getWriters(
+            @RequestParam(defaultValue = "") String name,
+            @RequestParam(defaultValue = "") String age,
+            @RequestParam(defaultValue = "") float reviews) throws WriterNotFoundException {
+
+        if (name.equals("") && (age.equals("")) && (reviews == 0)) {
+            logger.debug("get writers with filters");
+            return ResponseEntity.ok(writerService.findAll());
+        } else if ((age.equals("")) && (reviews == 0)) {
+            logger.debug("get writers with filters");
+            return ResponseEntity.ok(writerService.findByName(name));
+        } else if (name.equals("") && (age.equals(""))) {
+            logger.debug("get writers with filters");
+            return ResponseEntity.ok(writerService.findByReviews(reviews));
+        } else if (name.equals("") && (reviews == 0)) {
+            logger.debug("get writers with filters");
+            return ResponseEntity.ok((writerService.findByAge(age)));
+        }
+        logger.debug("get writers with filters");
+        List<Writer> writers = writerService.findByNameAndAgeAndReviews(name, age, reviews);
+        return ResponseEntity.ok(writers);
     }
 
     @GetMapping("writers/id")
