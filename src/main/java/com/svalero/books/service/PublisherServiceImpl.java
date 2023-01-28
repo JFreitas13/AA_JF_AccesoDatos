@@ -1,5 +1,6 @@
 package com.svalero.books.service;
 
+import com.svalero.books.domain.Bookstore;
 import com.svalero.books.domain.Publisher;
 import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.repository.PublisherRepository;
@@ -42,6 +43,26 @@ public class PublisherServiceImpl implements PublisherService{
     @Override
     public List<Publisher> findAll() {
         return publisherRepository.findAll();
+    }
+
+    @Override
+    public List<Publisher> findByZipCode(String zipCode) {
+        return publisherRepository.findByZipCode(zipCode);
+    }
+
+    @Override
+    public List<Publisher> findByName(String name) {
+        return publisherRepository.findByName(name);
+    }
+
+    @Override
+    public List<Publisher> findByCity(String city) {
+        return publisherRepository.findByCity(city);
+    }
+
+    @Override
+    public List<Publisher> findByNameAndCityAndZipCode(String name, String city, String zipCode) {
+        return publisherRepository.findByNameAndCityAndZipCode(name, city, zipCode);
     }
 
     @Override

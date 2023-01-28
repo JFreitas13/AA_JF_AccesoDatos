@@ -56,9 +56,40 @@ public class PublisherController {
 
     //buscar todas las editoriales
     @GetMapping("/publishers")
-    public ResponseEntity<List<Publisher>> getPublishers() {
-        return ResponseEntity.ok(publisherService.findAll());
+    public ResponseEntity<List<Publisher>> getPublishers(
+            @RequestParam(defaultValue = "") String name,
+            @RequestParam(defaultValue = "") String city,
+            @RequestParam(defaultValue = "") String zipCode) throws PublisherNotFoundException {
+
+        if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
+            logger.debug("get publisher with filters");
+            return ResponseEntity.ok(publisherService.findAll());
+        } else if ((city.equals("")) && zipCode.equals("")) {
+            logger.debug("get publisher with filters");
+            return ResponseEntity.ok(publisherService.findByName(name));
+        } else if (name.equals("") && (city.equals(""))) {
+            logger.debug("get publisher with filters");
+            return ResponseEntity.ok(publisherService.findByZipCode(zipCode));
+        } else if (name.equals("") && zipCode.equals("")) {
+            logger.debug("get publisher with filters");
+            return ResponseEntity.ok((publisherService.findByCity(city)));
+        }
+        logger.debug("get publisher with filters");
+        List<Publisher> publishers = publisherService.findByNameAndCityAndZipCode(name, city, zipCode);
+        return ResponseEntity.ok(publishers);
     }
+
+    //    @GetMapping("/bookstores")
+//    public ResponseEntity<List<Bookstore>> getBookstores(
+//            @RequestParam(defaultValue = "") String name,
+//            @RequestParam(defaultValue = "") String city,
+//            @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
+//
+////        List<Bookstore> bookstores = null;
+//
+//
+//
+//    }
 
     //buscar editorial por id
     @GetMapping("/publishers/{id}")

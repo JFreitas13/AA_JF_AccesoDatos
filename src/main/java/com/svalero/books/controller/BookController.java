@@ -87,33 +87,6 @@ public class BookController {
         return ResponseEntity.ok(books); //me devuelve desde el service
     }
 
-//    @GetMapping("/bookstores")
-//    public ResponseEntity<List<Bookstore>> getBookstores(
-//            @RequestParam(defaultValue = "") String name,
-//            @RequestParam(defaultValue = "") String city,
-//            @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
-//
-////        List<Bookstore> bookstores = null;
-//
-//        if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
-//            logger.debug("get with filters");
-//            return ResponseEntity.ok(bookstoreService.findAll());
-//        } else if ((city.equals("")) && zipCode.equals("")) {
-//            logger.debug("get with filters");
-//            return ResponseEntity.ok(bookstoreService.findByName(name));
-//        } else if (name.equals("") && (city.equals(""))) {
-//            logger.debug("get with filters");
-//            return ResponseEntity.ok(bookstoreService.findByZipCode(zipCode));
-//        } else if (name.equals("") && zipCode.equals("")) {
-//            logger.debug("get with filters");
-//            return ResponseEntity.ok((bookstoreService.findByCity(city)));
-//        }
-//        logger.debug("get with filters");
-//        List<Bookstore> bookstores = bookstoreService.findByNameAndCityAndZipCode(name, city, zipCode);
-//        return ResponseEntity.ok(bookstores);
-//
-//    }
-
     //buscar libro por id
     @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBook(@PathVariable long id) throws BookNotFoundException {
