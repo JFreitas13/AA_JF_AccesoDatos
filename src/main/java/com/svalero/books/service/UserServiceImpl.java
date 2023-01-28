@@ -1,6 +1,5 @@
 package com.svalero.books.service;
 
-import com.svalero.books.domain.Publisher;
 import com.svalero.books.domain.User;
 import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.repository.UserRepository;

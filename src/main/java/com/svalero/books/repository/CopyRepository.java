@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface CopyRepository extends CrudRepository<Copy, Long> {
-
     List<Copy> findAll();
 }

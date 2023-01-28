@@ -1,8 +1,6 @@
 package com.svalero.books.service;
 
-import com.svalero.books.domain.Bookstore;
 import com.svalero.books.domain.Publisher;
-import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.PublisherNotFoundException;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.svalero.books.service;
 
-import com.svalero.books.domain.Bookstore;
 import com.svalero.books.domain.Publisher;
 import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.repository.PublisherRepository;
@@ -70,6 +69,4 @@ public class PublisherServiceImpl implements PublisherService{
         return publisherRepository.findById(id)
                 .orElseThrow(PublisherNotFoundException::new);
     }
-
-
 }

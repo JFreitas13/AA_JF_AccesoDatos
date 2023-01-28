@@ -49,5 +49,4 @@ public class Writer {
     @OneToMany(mappedBy = "bookWriter")
     @JsonBackReference(value = "book_writer")
     private List<Book> books;
-
 }

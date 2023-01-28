@@ -1,9 +1,7 @@
 package com.svalero.books.controller;
 
-import com.svalero.books.domain.Publisher;
 import com.svalero.books.domain.User;
 import com.svalero.books.exception.ErrorMessage;
-import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.service.UserService;
 import org.slf4j.Logger;
@@ -36,14 +34,6 @@ public class UserController {
         logger.debug("end addUser");
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
-//
-//    @PostMapping("/books/{booksId}/users")
-//    public ResponseEntity<User> addUser(@Valid @PathVariable(value = "booksId") Long userId, @RequestBody User user) {
-//        logger.debug("begin addUser");
-//        User newUser = userService.addUser(user);
-//        logger.debug("end addUser");
-//        return new ResponseEntity<>(user, HttpStatus.CREATED);
-//    }
 
     //borrar usuario
     @DeleteMapping("/users/{id}")
@@ -63,7 +53,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedUser);
     }
 
-    //buscar todos los usuarios
+    //buscar todos los usuarios con filtros
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers(
             @RequestParam(defaultValue = "") String name,
@@ -97,7 +87,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    //Excepción 404: Book not found
+    //Excepción 404: User not found
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorMessage> handleUserNotFoundException(UserNotFoundException unfe) {
         logger.error((unfe.getMessage()), unfe); //traza de log

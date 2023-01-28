@@ -80,6 +80,4 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "writer_id")
     private Writer bookWriter;
-
-
 }

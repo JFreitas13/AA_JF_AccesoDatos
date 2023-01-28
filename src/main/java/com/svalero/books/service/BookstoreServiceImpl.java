@@ -1,7 +1,6 @@
 package com.svalero.books.service;
 
 import com.svalero.books.domain.Bookstore;
-import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.repository.BookstoreRepository;
 import org.modelmapper.ModelMapper;

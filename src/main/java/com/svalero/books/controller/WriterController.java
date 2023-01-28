@@ -1,9 +1,7 @@
 package com.svalero.books.controller;
 
-import com.svalero.books.domain.User;
 import com.svalero.books.domain.Writer;
 import com.svalero.books.exception.ErrorMessage;
-import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.exception.WriterNotFoundException;
 import com.svalero.books.service.WriterService;
 import org.slf4j.Logger;
@@ -28,6 +26,7 @@ public class WriterController {
 
     private final Logger logger = LoggerFactory.getLogger(WriterController.class);
 
+    //añadir escritor
     @PostMapping("/writers")
     public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer) {
         logger.debug("begin addWriter");
@@ -36,6 +35,7 @@ public class WriterController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newWriter);
     }
 
+    //borrar escritor
     @DeleteMapping("/writers/{id}")
     public ResponseEntity<Void> deleteWriter(@PathVariable long id) throws WriterNotFoundException {
         logger.debug("begin deleteWriter");
@@ -44,6 +44,7 @@ public class WriterController {
         return ResponseEntity.noContent().build();
     }
 
+    //modificar escritor
     @PutMapping("writers/{id}")
     public ResponseEntity<Writer> modifyWriter(@PathVariable long id, Writer writer) throws WriterNotFoundException {
         logger.debug("begin modifyWriter");
@@ -52,6 +53,7 @@ public class WriterController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedWriter);
     }
 
+    //buscar escritor con filtros
     @GetMapping("/writers")
     public ResponseEntity<List<Writer>> getWriters(
             @RequestParam(defaultValue = "") String name,
@@ -76,6 +78,7 @@ public class WriterController {
         return ResponseEntity.ok(writers);
     }
 
+    //buscar escritor por id
     @GetMapping("writers/id")
     public ResponseEntity<Writer> getWriter(@PathVariable long id) throws WriterNotFoundException {
         logger.debug("begin getWriter");
@@ -84,7 +87,7 @@ public class WriterController {
         return ResponseEntity.ok(writer);
     }
 
-    //Excepción 404: Book not found
+    //Excepción 404: Writer not found
     @ExceptionHandler(WriterNotFoundException.class)
     public ResponseEntity<ErrorMessage> handleWriterNotFoundException(WriterNotFoundException wnfe) {
         logger.error((wnfe.getMessage()), wnfe); //traza de log
@@ -114,5 +117,4 @@ public class WriterController {
         ErrorMessage errorMessage = new ErrorMessage(500, "Internal Server Error");
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }

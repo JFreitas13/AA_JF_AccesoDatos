@@ -1,10 +1,8 @@
 package com.svalero.books.service;
 
 import com.svalero.books.domain.Bookstore;
-import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 
-import java.time.zone.ZoneOffsetTransition;
 import java.util.List;
 
 public interface BookstoreService {

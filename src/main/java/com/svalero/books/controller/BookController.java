@@ -1,7 +1,6 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Book;
-import com.svalero.books.domain.Bookstore;
 import com.svalero.books.exception.*;
 import com.svalero.books.service.BookService;
 import org.slf4j.Logger;
@@ -45,7 +44,7 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
-//    //modificar libro
+//
 //    @PutMapping("/books/{id}")
 //    public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
 //        logger.debug("begin modifyBook");
@@ -54,6 +53,7 @@ public class BookController {
 //        return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
 //    }
 
+    //modificar libro
     @PutMapping("/books/{id}/{publishersId}/{writerId}")
     public ResponseEntity<Book> modifyBook(@PathVariable long id,  @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException {
         logger.debug("begin modifyBook");
@@ -62,7 +62,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
     }
 
-    //buscar todos los libros
+    //buscar todos los libros con filtros
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getBooks(
                 @RequestParam(defaultValue = "") String name,

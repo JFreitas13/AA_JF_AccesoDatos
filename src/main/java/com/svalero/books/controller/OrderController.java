@@ -28,6 +28,7 @@ public class OrderController {
 
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
+    //añadir order
     @PostMapping("/orders/{bookId}/{userId}")
     public ResponseEntity<Order> addOrder(@Valid @PathVariable("bookId") long bookId, @PathVariable("userId") long userId, @RequestBody Order order) throws BookNotFoundException, UserNotFoundException {
         logger.debug("begin addOrder"); //Para indicar en el log que alguien ha llamado a esta parte
@@ -36,6 +37,7 @@ public class OrderController {
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
+    //borrar order
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable long id) throws OrderNotFoundException {
         logger.debug("begin deleteOrder");
@@ -52,6 +54,7 @@ public class OrderController {
 //        return ResponseEntity.status(HttpStatus.OK).body(modifiedOrder);
 //    }
 
+    //modificar order
     @PutMapping("/orders/{id}/{bookId}/{userId}")
     public ResponseEntity<Order> modifyOrder(@PathVariable long id, @PathVariable("bookId") long bookId, @PathVariable("userId") long userId, @RequestBody Order order) throws OrderNotFoundException, BookNotFoundException, UserNotFoundException {
         logger.debug("begin modifyOrder");
@@ -60,12 +63,13 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedOrder);
     }
 
+    //buscar todas orders
     @GetMapping("/orders")
     public ResponseEntity<List<Order>> getOrders() {
         return ResponseEntity.ok(orderService.findAll()); //me devuelve desde el service
     }
 
-    //buscar libro por id
+    //buscar order por id
     @GetMapping("/orders/{id}")
     public ResponseEntity<Order> getOrder(@PathVariable long id) throws OrderNotFoundException {
         logger.debug("begin getOrder"); //Para indicar en el log que alguien ha llamado a esta parte

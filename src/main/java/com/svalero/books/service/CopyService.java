@@ -2,7 +2,6 @@ package com.svalero.books.service;
 
 
 import com.svalero.books.domain.Copy;
-import com.svalero.books.domain.Order;
 import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.CopyNotFoundException;

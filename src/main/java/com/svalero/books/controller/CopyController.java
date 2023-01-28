@@ -25,6 +25,7 @@ public class CopyController {
 
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
+    //añadir copy
     @PostMapping("/copies/{bookId}/{bookstoreId}")
     public ResponseEntity<Copy> addCopy(@Valid @PathVariable("bookId") long bookId, @PathVariable("bookstoreId") long bookstoreId, @RequestBody Copy copy) throws BookNotFoundException, BookstoreNotFoundException {
         logger.debug("begin addCopy"); //Para indicar en el log que alguien ha llamado a esta parte
@@ -33,6 +34,7 @@ public class CopyController {
         return new ResponseEntity<>(newCopy, HttpStatus.CREATED);
     }
 
+    //borrar copy
     @DeleteMapping("/copies/{id}")
     public ResponseEntity<Void> deleteCopy(@PathVariable long id) throws CopyNotFoundException {
         logger.debug("begin deleteCopy");
@@ -49,6 +51,7 @@ public class CopyController {
 //        return ResponseEntity.status(HttpStatus.OK).body(modifiedCopy);
 //    }
 
+    //modificar copy
     @PutMapping("/copies/{id}/{bookId}/{bookstoreId}")
     public ResponseEntity<Copy> modifyCopy(@PathVariable long id, @PathVariable("bookId") long bookId, @PathVariable("bookstoreId") long bookstoreId, @RequestBody Copy copy) throws CopyNotFoundException, BookNotFoundException, BookstoreNotFoundException {
         logger.debug("begin modifyCopy");
@@ -57,18 +60,19 @@ public class CopyController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedCopy);
     }
 
+    //buscar todas las copies
     @GetMapping("/copies")
     public ResponseEntity<List<Copy>> getCopies() {
         return ResponseEntity.ok(copyService.findAll()); //me devuelve desde el service
     }
 
-    //buscar libro por id
+    //buscar copy por id
     @GetMapping("/copies/{id}")
     public ResponseEntity<Copy> getCopy(@PathVariable long id) throws CopyNotFoundException {
-        logger.debug("begin getCopy"); //Para indicar en el log que alguien ha llamado a esta parte
-        Copy copy = copyService.findById(id); //cojo el libro
-        logger.debug("end getCopy"); //Para indicar en el log que termina la llamada anterior
-        return ResponseEntity.ok(copy); //devuelvo la respuesta con el book
+        logger.debug("begin getCopy");
+        Copy copy = copyService.findById(id);
+        logger.debug("end getCopy");
+        return ResponseEntity.ok(copy);
     }
 
     //Excepción 404: Order not found

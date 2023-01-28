@@ -1,7 +1,6 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Bookstore;
-import com.svalero.books.exception.BookNotFoundException;
 import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.ErrorMessage;
 import com.svalero.books.service.BookstoreService;
@@ -54,7 +53,7 @@ public class BookstoreController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBookstore);
     }
 
-    //buscar todas librerias
+    //buscar todas librerias con filtros
     @GetMapping("/bookstores")
     public ResponseEntity<List<Bookstore>> getBookstores(
                 @RequestParam(defaultValue = "") String name,
@@ -89,7 +88,7 @@ public class BookstoreController {
         return ResponseEntity.ok(bookstore);
     }
 
-    //Excepción 404: Book not found
+    //Excepción 404: Bookstore not found
     @ExceptionHandler(BookstoreNotFoundException.class)
     public ResponseEntity<ErrorMessage> handleBookstoreNotFoundException(BookstoreNotFoundException bsnfe) {
         logger.error((bsnfe.getMessage()), bsnfe); //traza de log

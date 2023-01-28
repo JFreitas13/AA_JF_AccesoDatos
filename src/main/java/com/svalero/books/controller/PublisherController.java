@@ -54,7 +54,7 @@ public class PublisherController {
         return ResponseEntity.status(HttpStatus.OK).body(modifiedPublisher);
     }
 
-    //buscar todas las editoriales
+    //buscar todas las editoriales con filtro
     @GetMapping("/publishers")
     public ResponseEntity<List<Publisher>> getPublishers(
             @RequestParam(defaultValue = "") String name,
@@ -88,13 +88,12 @@ public class PublisherController {
         return ResponseEntity.ok(publisher);
     }
 
-    //Excepción 404: Book not found
+    //Excepción 404: Publisher not found
     @ExceptionHandler(PublisherNotFoundException.class)
     public ResponseEntity<ErrorMessage> handlePublisherNotFoundException(PublisherNotFoundException pnfe) {
         logger.error((pnfe.getMessage()), pnfe); //traza de log
         ErrorMessage errorMessage = new ErrorMessage(404, pnfe.getMessage());
         return new ResponseEntity(errorMessage, HttpStatus.NOT_FOUND);
-
     }
 
     //Excetion 400: Bad request
