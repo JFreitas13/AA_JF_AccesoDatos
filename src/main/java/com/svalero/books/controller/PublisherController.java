@@ -79,18 +79,6 @@ public class PublisherController {
         return ResponseEntity.ok(publishers);
     }
 
-    //    @GetMapping("/bookstores")
-//    public ResponseEntity<List<Bookstore>> getBookstores(
-//            @RequestParam(defaultValue = "") String name,
-//            @RequestParam(defaultValue = "") String city,
-//            @RequestParam(defaultValue = "") String zipCode) throws BookNotFoundException, BookstoreNotFoundException {
-//
-////        List<Bookstore> bookstores = null;
-//
-//
-//
-//    }
-
     //buscar editorial por id
     @GetMapping("/publishers/{id}")
     public ResponseEntity<Publisher> getPublisher(@PathVariable long id) throws PublisherNotFoundException {

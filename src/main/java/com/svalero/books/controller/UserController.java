@@ -1,7 +1,9 @@
 package com.svalero.books.controller;
 
+import com.svalero.books.domain.Publisher;
 import com.svalero.books.domain.User;
 import com.svalero.books.exception.ErrorMessage;
+import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.service.UserService;
 import org.slf4j.Logger;
@@ -63,8 +65,27 @@ public class UserController {
 
     //buscar todos los usuarios
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<User>> getUsers(
+            @RequestParam(defaultValue = "") String name,
+            @RequestParam(defaultValue = "") String city,
+            @RequestParam(defaultValue = "") String zipCode) throws UserNotFoundException {
+
+        if (name.equals("") && (city.equals("")) && zipCode.equals("")) {
+            logger.debug("get user with filters");
+            return ResponseEntity.ok(userService.findAll());
+        } else if ((city.equals("")) && zipCode.equals("")) {
+            logger.debug("get user with filters");
+            return ResponseEntity.ok(userService.findByName(name));
+        } else if (name.equals("") && (city.equals(""))) {
+            logger.debug("get user with filters");
+            return ResponseEntity.ok(userService.findByZipCode(zipCode));
+        } else if (name.equals("") && zipCode.equals("")) {
+            logger.debug("get user with filters");
+            return ResponseEntity.ok((userService.findByCity(city)));
+        }
+        logger.debug("get publisher with filters");
+        List<User> users = userService.findByNameAndCityAndZipCode(name, city, zipCode);
+        return ResponseEntity.ok(users);
     }
 
     //buscar usuario por id

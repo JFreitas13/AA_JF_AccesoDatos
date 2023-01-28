@@ -1,5 +1,6 @@
 package com.svalero.books.service;
 
+import com.svalero.books.domain.Publisher;
 import com.svalero.books.domain.User;
 import com.svalero.books.exception.UserNotFoundException;
 import com.svalero.books.repository.UserRepository;
@@ -42,6 +43,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findByZipCode(String zipCode) {
+        return userRepository.findByZipCode(zipCode);
+    }
+
+    @Override
+    public List<User> findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    @Override
+    public List<User> findByCity(String city) {
+        return userRepository.findByCity(city);
+    }
+
+    @Override
+    public List<User> findByNameAndCityAndZipCode(String name, String city, String zipCode) {
+        return userRepository.findByNameAndCityAndZipCode(name, city, zipCode);
     }
 
     @Override
