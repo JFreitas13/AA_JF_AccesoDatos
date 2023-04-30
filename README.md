@@ -17,3 +17,5 @@
 - [ ] Añade 3 operaciones que utilicen consultas SQL nativas para extraer la información de la base de datos
 - [x] Añade 2 clases más al modelo de datos con sus respectivas operaciones CRUD (inclúyelas también en la colección Postman)
 - [ ] Parametriza la colección Postman para que pueda ser ejecutada con el Runner de Postman y realizar una prueba completa de la API
+
+## Actividad de Aprendizaje de a asignatura de Acceso a Datos - 2Q
