@@ -53,14 +53,21 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Validar Datos desde Spring Boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<!-- fin Validar Datos desde Spring Boot -->
+
 		<!-- Libreria para mapear campos entre objetos -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<!-- FIN Libreria para mapear campos entre objetos -->
-
+		<!-- fin Libreria para mapear campos entre objetos -->
 	</dependencies>
 
 	<build>
@@ -78,7 +85,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- Para que funcione esta mierda -->
+			<!-- Para que funcione el proyecto -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-toolchains-plugin</artifactId>
@@ -99,7 +106,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Fin Para que funcione esta mierda -->
+			<!-- Fin Para que funcione el proyecto -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
