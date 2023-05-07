@@ -50,7 +50,7 @@ paths:
       tags:
         - Book
       summary: Listado de libros
-      description: Listado con la informacion de todos los libros. Tiene disponibles 3 filtros que son name, yearEdition y pagesNumber.
+      description: Listado con la información de todos los libros. Tiene disponibles 3 filtros que son name, yearEdition y pagesNumber.
       operationId: getBooks
       parameters:
         - $ref: '#/components/parameters/NameBook'
@@ -82,6 +82,8 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -90,15 +92,17 @@ paths:
       tags:
         - Book
       summary: Buscar libro por id
-      description: Obtiene la informacion del libro cuya id se pasa en la URL.
+      description: Obtiene la información del libro cuya id se pasa en la URL.
       operationId: getBookId
       responses:
         '200':
-          description: Informacion del libro buscado por id.
+          description: Información del libro buscado por id.
           content:
             application/json:
               schema:
                   $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -109,7 +113,7 @@ paths:
       tags:
         - Book
       summary: Modificar un libro
-      description: Operacion que permite modificar un libro
+      description: Operación que permite modificar un libro
       operationId: modifyBook
       requestBody:
         required: true
@@ -158,7 +162,7 @@ paths:
       tags:
         - Bookstore
       summary: Listado de librerias
-      description: Listado con la informacion de todas las librerias. Tiene disponibles 3 filtros que son name, city y zipCode.
+      description: Listado con la información de todas las librerias. Tiene disponibles 3 filtros que son name, city y zipCode.
       operationId: getBookstore
       parameters:
         - $ref: '#/components/parameters/NameBookstore'
@@ -190,6 +194,8 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -198,15 +204,17 @@ paths:
       tags:
         - Bookstore
       summary: Buscar libreria por id
-      description: Obtiene la informacion de la libreria cuya id se pasa en la URL.
+      description: Obtiene la información de la libreria cuya id se pasa en la URL.
       operationId: getBookstoreId
       responses:
         '200':
-          description: Informacion de la libreria buscado por id.
+          description: Información de la libreria buscada por id.
           content:
             application/json:
               schema:
                   $ref: '#/components/schemas/Bookstore'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
            $ref: '#/components/responses/NotFound'
         '500':
@@ -216,7 +224,7 @@ paths:
       tags:
         - Bookstore
       summary: Modificar una libreria
-      description: Operacion que permite modificar una libreria
+      description: Operación que permite modificar una libreria
       operationId: modifyBookstore
       requestBody:
         required: true
@@ -226,7 +234,7 @@ paths:
               $ref: '#/components/schemas/BookstoreIn'
       responses:
         '201':
-          description: Libreria modificado correctamente
+          description: Libreria modificada correctamente
           content:
             application/json:
               schema:
@@ -265,7 +273,7 @@ paths:
       tags:
         - Publisher
       summary: Listado de editoriales
-      description: Listado con la informacion de todas las editoriales. Tiene disponibles 3 filtros que son name, city y zipCode.
+      description: Listado con la información de todas las editoriales. Tiene disponibles 3 filtros que son name, city y zipCode.
       operationId: getPublisher
       parameters:
         - $ref: '#/components/parameters/NamePublisher'
@@ -297,6 +305,8 @@ paths:
       responses:
          '204':
             $ref: '#/components/responses/NoContent'
+         '400':
+           $ref: '#/components/responses/BadRequest'
          '404':
             $ref: '#/components/responses/NotFound'
          '500':
@@ -305,15 +315,17 @@ paths:
       tags:
         - Publisher
       summary: Buscar editorial por id
-      description: Obtiene la informacion de la editorial cuya id se pasa en la URL.
+      description: Obtiene la información de la editorial cuya id se pasa en la URL.
       operationId: getPublisherId
       responses:
         '200':
-          description: Informacion de la editorial buscado por id.
+          description: Información de la editorial buscado por id.
           content:
             application/json:
                schema:
                    $ref: '#/components/schemas/Publisher'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
            $ref: '#/components/responses/NotFound'
         '500':
@@ -323,7 +335,7 @@ paths:
       tags:
         - Publisher
       summary: Modificar una editorial
-      description: Operacion que permite modificar una editorial
+      description: Operación que permite modificar una editorial
       operationId: modifyPublisher
       requestBody:
         required: true
@@ -372,7 +384,7 @@ paths:
       tags:
         - Writer
       summary: Listado de escritores
-      description: Listado con la informacion de todas los escritores. Tiene disponibles 3 filtros que son name, city y zipCode.
+      description: Listado con la información de todas los escritores. Tiene disponibles 3 filtros que son name, city y zipCode.
       operationId: getWriters
       parameters:
         - $ref: '#/components/parameters/NameWriter'
@@ -404,6 +416,8 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -412,15 +426,17 @@ paths:
       tags:
         - Writer
       summary: Buscar escritor por id
-      description: Obtiene la informacion del escritor cuya id se pasa en la URL.
+      description: Obtiene la información del escritor cuya id se pasa en la URL.
       operationId: getWriterId
       responses:
         '200':
-          description: Informacion del escritor buscado por id.
+          description: Información del escritor buscado por id.
           content:
             application/json:
               schema:
                   $ref: '#/components/schemas/Writer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -479,7 +495,7 @@ paths:
       tags:
         - User
       summary: Listado de usuarios
-      description: Listado con la informacion de todos los usuarios. Tiene disponibles 3 filtros que son name, city y zipCode.
+      description: Listado con la información de todos los usuarios. Tiene disponibles 3 filtros que son name, city y zipCode.
       operationId: getWriters
       parameters:
         - $ref: '#/components/parameters/NameUser'
@@ -511,6 +527,8 @@ paths:
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -523,11 +541,13 @@ paths:
       operationId: getUserId
       responses:
         '200':
-          description: Informacion del usuario buscado por id.
+          description: Información del usuario buscado por id.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
