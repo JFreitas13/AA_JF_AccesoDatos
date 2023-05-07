@@ -22,7 +22,7 @@ tags:
 
 # rutas de las operaciones por cada path
 paths:
-  /books/{publishersId}/{writerId}:
+  /publishers/{publishersId}/writers/{writerId}/books:
     post:
       tags:
         - Book
@@ -65,6 +65,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -101,6 +103,33 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+
+  /books/{id}/{publishersId}/{writerId}:
+    put:
+      tags:
+        - Book
+      summary: Modificar un libro
+      description: Operacion que permite modificar un libro
+      operationId: modifyBook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookIn'
+      responses:
+         '201':
+           description: Libro modificado correctamente
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/Book'
+         '400':
+           $ref: '#/components/responses/BadRequest'
+         '404':
+           $ref: '#/components/responses/NotFound'
+         '500':
+           $ref: '#/components/responses/InternalServerError'
 
   /bookstores:
     post:
@@ -144,6 +173,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Bookstore'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -180,6 +211,32 @@ paths:
            $ref: '#/components/responses/NotFound'
         '500':
            $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Bookstore
+      summary: Modificar una libreria
+      description: Operacion que permite modificar una libreria
+      operationId: modifyBookstore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookstoreIn'
+      responses:
+        '201':
+          description: Libreria modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bookstore'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 
   /publishers:
     post:
@@ -223,6 +280,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Publisher'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -259,6 +318,32 @@ paths:
            $ref: '#/components/responses/NotFound'
         '500':
            $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Publisher
+      summary: Modificar una editorial
+      description: Operacion que permite modificar una editorial
+      operationId: modifyPublisher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublisherIn'
+      responses:
+        '201':
+          description: Editorial modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 
   /writers:
     post:
@@ -302,6 +387,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Writer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -334,6 +421,32 @@ paths:
             application/json:
               schema:
                   $ref: '#/components/schemas/Writer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Writer
+      summary: Modificar un escritor
+      description: Operación que permite modificar un escritor
+      operationId: modifyWriter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriterIn'
+      responses:
+        '201':
+          description: Escritor modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Writer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -381,6 +494,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
 
@@ -413,6 +528,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - User
+      summary: Modificar un usuario
+      description: Operacion que permite modificar un usuario
+      operationId: modifyUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserIn'
+      responses:
+        '201':
+          description: Usuario modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -669,11 +810,11 @@ components:
         fieldName:
           type: string
           description: El campo donde se ha producido el error
-          example: name
+          example: campo param
         message:
           type: string
           description: Mensaje de error asociado con el campo
-          example: Nombre incorrecto
+          example: Datos incorrectos en alguno de los campos
 
     NotFound:
       type: object

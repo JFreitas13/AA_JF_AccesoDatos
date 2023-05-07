@@ -46,14 +46,6 @@ public class OrderController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PutMapping("/orders/{id}")
-//    public ResponseEntity<Order> modifyOrder(@PathVariable long id, @RequestBody Order order) throws OrderNotFoundException {
-//        logger.debug("begin modifyOrder");
-//        Order modifiedOrder = orderService.modifyOrder(id, order);
-//        logger.debug("end modifyOrder");
-//        return ResponseEntity.status(HttpStatus.OK).body(modifiedOrder);
-//    }
-
     //modificar order
     @PutMapping("/orders/{id}/{bookId}/{userId}")
     public ResponseEntity<Order> modifyOrder(@PathVariable long id, @PathVariable("bookId") long bookId, @PathVariable("userId") long userId, @RequestBody Order order) throws OrderNotFoundException, BookNotFoundException, UserNotFoundException {
