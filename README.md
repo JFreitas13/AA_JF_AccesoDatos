@@ -1,4 +1,4 @@
-# AA_JF_AccesoDatos_1Q
+# AA_JF_AccesoDatos
 ## Actividad de Aprendizaje de a asignatura de Acceso a Datos - 1Q
 
 ### Requisitos (1 pto cada uno, obligatorios)
