@@ -79,7 +79,7 @@ public class WriterController {
     }
 
     //buscar escritor por id
-    @GetMapping("writers/id")
+    @GetMapping("writers/{id}")
     public ResponseEntity<Writer> getWriter(@PathVariable long id) throws WriterNotFoundException {
         logger.debug("begin getWriter");
         Writer writer = writerService.findById(id);

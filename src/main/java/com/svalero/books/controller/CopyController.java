@@ -26,7 +26,7 @@ public class CopyController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
     //añadir copy
-    @PostMapping("/copies/{bookId}/{bookstoreId}")
+    @PostMapping("/books/{bookId}/bookstores/{bookstoreId}/copies")
     public ResponseEntity<Copy> addCopy(@Valid @PathVariable("bookId") long bookId, @PathVariable("bookstoreId") long bookstoreId, @RequestBody Copy copy) throws BookNotFoundException, BookstoreNotFoundException {
         logger.debug("begin addCopy"); //Para indicar en el log que alguien ha llamado a esta parte
         Copy newCopy = copyService.addCopy(copy, bookId, bookstoreId);

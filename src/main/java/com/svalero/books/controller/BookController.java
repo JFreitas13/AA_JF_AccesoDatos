@@ -27,7 +27,15 @@ public class BookController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class); //Creamos el objeto capaz de pintar las trazas en el log y lo asociamos a la clase que queremos controlar
 
     //añadir libro
-    @PostMapping("/books/{publishersId}/{writerId}")
+//    @PostMapping("/books/{publishersId}/{writerId}")
+//    public ResponseEntity<Book> addBook(@Valid @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws PublisherNotFoundException, WriterNotFoundException {
+//        logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
+//        Book newBook = bookService.addBook(book, publisherId, writerId);
+//        logger.debug("end addBook"); //Para indicar en el log que termina la llamada anterior
+//        return new ResponseEntity<>(newBook, HttpStatus.CREATED);
+//    }
+
+    @PostMapping("/publishers/{publishersId}/writers/{writerId}/books")
     public ResponseEntity<Book> addBook(@Valid @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws PublisherNotFoundException, WriterNotFoundException {
         logger.debug("begin addBook"); //Para indicar en el log que alguien ha llamado a esta parte
         Book newBook = bookService.addBook(book, publisherId, writerId);
@@ -64,7 +72,7 @@ public class BookController {
 
     //buscar todos los libros con filtros
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks(
+    public ResponseEntity<?> getBooks(
                 @RequestParam(defaultValue = "") String name,
                 @RequestParam(defaultValue = "0") int yearEdition,
                 @RequestParam(defaultValue = "0") int pagesNumber) throws BookNotFoundException {
