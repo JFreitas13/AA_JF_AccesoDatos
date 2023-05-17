@@ -23,6 +23,10 @@ tags:
 # rutas de las operaciones por cada path
 paths:
   /publishers/{publishersId}/writers/{writerId}/books:
+    parameters:
+      - $ref: '#/components/parameters/PublisherInBook'
+      - $ref: '#/components/parameters/WriterInBook'
+
     post:
       tags:
         - Book
@@ -108,7 +112,6 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 
-  /books/{id}/{publishersId}/{writerId}:
     put:
       tags:
         - Book
@@ -122,7 +125,7 @@ paths:
             schema:
               $ref: '#/components/schemas/BookIn'
       responses:
-         '201':
+         '200':
            description: Libro modificado correctamente
            content:
              application/json:
@@ -233,7 +236,7 @@ paths:
             schema:
               $ref: '#/components/schemas/BookstoreIn'
       responses:
-        '201':
+        '200':
           description: Libreria modificada correctamente
           content:
             application/json:
@@ -344,7 +347,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PublisherIn'
       responses:
-        '201':
+        '200':
           description: Editorial modificado correctamente
           content:
             application/json:
@@ -385,7 +388,7 @@ paths:
         - Writer
       summary: Listado de escritores
       description: Listado con la información de todas los escritores. Tiene disponibles 3 filtros que son name, city y zipCode.
-      operationId: getWriters
+      operationId: getAllWriters
       parameters:
         - $ref: '#/components/parameters/NameWriter'
         - $ref: '#/components/parameters/Age'
@@ -455,7 +458,7 @@ paths:
             schema:
               $ref: '#/components/schemas/WriterIn'
       responses:
-        '201':
+        '200':
           description: Escritor modificado correctamente
           content:
             application/json:
@@ -566,7 +569,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UserIn'
       responses:
-        '201':
+        '200':
           description: Usuario modificado correctamente
           content:
             application/json:
@@ -888,9 +891,8 @@ components:
             $ref: '#/components/schemas/InternalServerError'
 
   parameters:
-
     BookId:
-      name: bookId
+      name: id
       in: path
       description: ID del libro
       required: true
@@ -898,7 +900,6 @@ components:
         type: integer
         format: int32
         example: 2
-
     NameBook:
       name: name
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -908,7 +909,6 @@ components:
         type: string
         format: string
         example: Harry Potter
-
     YearEdition:
       name: yearEdition
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -918,7 +918,6 @@ components:
         type: integer
         format: int32
         example: 2020
-
     PagesNumber:
       name: pagesNumber
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -928,9 +927,8 @@ components:
         type: integer
         format: int32
         example: 245
-
     BookstoreId:
-      name: bookstoreId
+      name: id
       in: path
       description: ID de la libreria
       required: true
@@ -938,7 +936,6 @@ components:
         type: integer
         format: int32
         example: 2
-
     NameBookstore:
       name: name
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -948,10 +945,8 @@ components:
         type: string
         format: string
         example: Libreria de la Magia
-
-
     PublisherId:
-      name: publisherId
+      name: id
       in: path
       description: ID de la editorial
       required: true
@@ -959,7 +954,15 @@ components:
         type: integer
         format: int32
         example: 10
-
+    PublisherInBook:
+      name: publishersId
+      in: path
+      description: ID de la editorial
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 10
     NamePublisher:
       name: name
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -969,7 +972,6 @@ components:
         type: string
         format: string
         example: Editorial Mágica
-
     NameUser:
       name: name
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -979,8 +981,16 @@ components:
         type: string
         format: string
         example: Manuel Silva
-
     WriterId:
+      name: id
+      in: path
+      description: ID del escritor
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 20
+    WriterInBook:
       name: writerId
       in: path
       description: ID del escritor
@@ -989,9 +999,8 @@ components:
         type: integer
         format: int32
         example: 20
-
     UserId:
-      name: userId
+      name: id
       in: path
       description: ID del escritor
       required: true
@@ -999,7 +1008,6 @@ components:
         type: integer
         format: int32
         example: 9
-
     City:
       name: city
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -1009,7 +1017,6 @@ components:
         type: string
         format: string
         example: Zaragoza
-
     ZipCode:
       name: zipCode
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -1019,7 +1026,6 @@ components:
         type: string
         format: string
         example: 50410
-
     NameWriter:
       name: name
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -1029,7 +1035,6 @@ components:
         type: string
         format: string
         example: Pepito Manuel
-
     Age:
       name: age
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
@@ -1039,7 +1044,6 @@ components:
         type: string
         format: string
         example: 45
-
     Reviews:
       name: reviews
       in: query #@RequestParam: no forma parte de la URL, se carga por "?" como opción, es un "WHERE".
