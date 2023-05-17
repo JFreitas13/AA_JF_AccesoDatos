@@ -58,23 +58,25 @@ public class WriterController {
     public ResponseEntity<List<Writer>> getWriters(
             @RequestParam(defaultValue = "") String name,
             @RequestParam(defaultValue = "") String age,
-            @RequestParam(defaultValue = "") float reviews) throws WriterNotFoundException {
+            @RequestParam(defaultValue = "") String reviews) throws WriterNotFoundException {
 
-        if (name.equals("") && (age.equals("")) && (reviews == 0)) {
+        if (name.equals("") && (age.equals("")) && (reviews.equals(""))) {
             logger.debug("get writers with filters");
             return ResponseEntity.ok(writerService.findAll());
-        } else if ((age.equals("")) && (reviews == 0)) {
+        } else if ((age.equals("")) && (reviews.equals(""))) {
             logger.debug("get writers with filters");
             return ResponseEntity.ok(writerService.findByName(name));
         } else if (name.equals("") && (age.equals(""))) {
             logger.debug("get writers with filters");
-            return ResponseEntity.ok(writerService.findByReviews(reviews));
-        } else if (name.equals("") && (reviews == 0)) {
+            float reviewValue = reviews.equals("") ? 0 : Float.parseFloat(reviews);
+            return ResponseEntity.ok(writerService.findByReviews(reviewValue));
+        } else if (name.equals("") && (reviews.equals(""))) {
             logger.debug("get writers with filters");
             return ResponseEntity.ok((writerService.findByAge(age)));
         }
         logger.debug("get writers with filters");
-        List<Writer> writers = writerService.findByNameAndAgeAndReviews(name, age, reviews);
+        float reviewsValue = reviews.equals("") ? 0 : Float.parseFloat(reviews);
+        List<Writer> writers = writerService.findByNameAndAgeAndReviews(name, age, reviewsValue);
         return ResponseEntity.ok(writers);
     }
 

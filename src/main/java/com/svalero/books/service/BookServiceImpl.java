@@ -1,9 +1,11 @@
 package com.svalero.books.service;
 
 import com.svalero.books.domain.Book;
+import com.svalero.books.domain.Bookstore;
 import com.svalero.books.domain.Publisher;
 import com.svalero.books.domain.Writer;
 import com.svalero.books.exception.BookNotFoundException;
+import com.svalero.books.exception.BookstoreNotFoundException;
 import com.svalero.books.exception.PublisherNotFoundException;
 import com.svalero.books.exception.WriterNotFoundException;
 import com.svalero.books.repository.BookRepository;
@@ -53,15 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book modifyBook(long id, long publisherId, long writerId, Book newBook) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException {
-
-        Publisher existingPublisher = publisherRepository.findById(publisherId)
-                        .orElseThrow(PublisherNotFoundException::new);
-        newBook.setBookPublisher(existingPublisher);
-
-        Writer existingWriter = writerRepository.findById(writerId)
-                        .orElseThrow(WriterNotFoundException::new);
-        newBook.setBookWriter(existingWriter);
+    public Book modifyBook(long id, Book newBook) throws BookNotFoundException {
 
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(BookNotFoundException::new);
