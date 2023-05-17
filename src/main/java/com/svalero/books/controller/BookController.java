@@ -1,6 +1,7 @@
 package com.svalero.books.controller;
 
 import com.svalero.books.domain.Book;
+import com.svalero.books.domain.Bookstore;
 import com.svalero.books.exception.*;
 import com.svalero.books.service.BookService;
 import org.slf4j.Logger;
@@ -62,10 +63,10 @@ public class BookController {
 //    }
 
     //modificar libro
-    @PutMapping("/books/{id}/{publishersId}/{writerId}")
-    public ResponseEntity<Book> modifyBook(@PathVariable long id,  @PathVariable("publishersId") long publisherId, @PathVariable("writerId") long writerId, @RequestBody Book book) throws BookNotFoundException, PublisherNotFoundException, WriterNotFoundException {
+    @PutMapping("/books/{id}")
+    public ResponseEntity<Book> modifyBook(@PathVariable long id, @RequestBody Book book) throws BookNotFoundException {
         logger.debug("begin modifyBook");
-        Book modifiedBook = bookService.modifyBook(id, publisherId, writerId, book);
+        Book modifiedBook = bookService.modifyBook(id, book);
         logger.debug("end modifyBook");
         return ResponseEntity.status(HttpStatus.OK).body(modifiedBook);
     }
